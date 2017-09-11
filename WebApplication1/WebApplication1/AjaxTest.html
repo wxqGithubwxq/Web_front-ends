@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Ajax</title>
+    <script type="text/javascript" language="JavaScript" src="JS/jquery-3.2.0.min.js"></script>
+</head>
+<body>
+    <script language="JavaScript">
+        var http = null;
+        function getHttp() {
+            try {
+                if (window.ActiveXObject)
+                    http = new ActiveXObject("Microsoft.XMLHTTP");
+                else if (window.XMLHttpRequest)
+                    http = new XMLHttpRequest();
+                else
+                    alert("Getting XMLHttpRequest failed");
+            }
+            catch (e) {
+                alert(e.description);
+            }
+            return http;
+        }
+        function set() {
+            try {
+                if (http == null)
+                    http = getHttp();
+                http.onreadystatechange = process;
+                var p = $("#province").val();
+                var c = $("#city").val();
+                var s = "province=" + escape(p) + "&city=" + escape(c);
+                //http.open("GET","AjaxTest.ashx?"+s+"&rnd="+Math.random().toString(),true);
+                http.open("POST", "AjaxTest.ashx?rnd=" + Math.random().toString(), true);
+                http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");//POST请求头部
+                //http.responseType("msxml-document");
+                http.send(s);
+                //$("#baidu").html(http.responseText);
+            }
+            catch (e) {
+                alert(e.description);
+            }
+        }
+        function process() {
+            if (http.readyState == 4) {
+                //var root = http.responseXML.documentElement;
+                //var p = root.childNodes[0].firstChild.nodeValue;//ie10不支持selectSingleNode()方法
+                //var c = root.childNodes[1].firstChild.nodeValue;//xml获取方式
+                //var p = root.selectSingleNode("province").firstChild.nodeValue;
+                //var c = root.selectSingleNode("city").firstChild.nodeValue;
+                var json = http.responseText;
+                var obj = eval("(" + json + ")");
+                var p = obj.province;
+                var c = obj.city;
+                $("#msg").val(""+json+" province='" + p + "' city='" + c + "'");
+            }
+        }
+    </script>
+    <form>
+        省份<input type="text" id="province" />
+        城市<input type="text" id="city" />
+        <input type="button" value="提交" onclick="set()" /><br>
+        <input type="text" id="msg" style="margin-top:20px;margin-left:110px;width:400px" />
+        <span id="baidu"></span>
+    </form>
+</body>
+</html>

@@ -1,0 +1,1 @@
+﻿<%@ WebHandler Language="C#" CodeBehind="AjaxTest.ashx.cs" Class="WebApplication1.AjaxTest" %>

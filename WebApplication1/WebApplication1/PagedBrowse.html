@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>分页浏览</title>
+    <script type="text/javascript" language="JavaScript" src="JS/jquery-3.2.0.min.js"></script>
+    <script language="JavaScript">
+        var pageIndex = 0;
+        var pageSize = 10;
+        var pageCount = 0;
+        function display() {
+            try {
+                if ($("#page").seletecIndex >= 0)
+                    pageIndex = $("#page")[0].seletecIndex;
+                $.ajax({
+                    type: "get",
+                    url: "PagedBrowse.ashx?pageIndex=" + pageIndex.toString() + "&rnd=" + Math.random().toString(),
+                    data: {},
+                    async: true,
+                    success: function (resp) {
+                        try {
+                            var obj = eval("(" + resp + ")");
+                            if (obj.state == "OK") {
+                                var s = "<table border=1 align='center'><tr><td>序号</td><td>省份</td><td>城市</td></tr>";
+                                for (var i = 0; i < obj.zones.length; i++) {
+                                    var p = obj.zones[i].province;
+                                    var c = obj.zones[i].city;
+                                    s += "<tr><td>" + (pageIndex * pageSize + 1 + i).toString() + "</td><td>" + p + "</td><td>" + c + "</td></tr></table";
+                                }
+                                    pageCount = parseInt(obj.count);
+                                    if ($("#page")[0].options.length == 0) {
+                                        for (var i = 0; i < pageCount; i++) {
+                                            $("#page")[0].options.add(new Option(i + 1, i + 1));
+                                        }
+                                        if (pageCount > 0)
+                                            $("#page").selectIndex = 0;
+                                    }
+                                    $("#msg").html(s);
+                                }
+                             else
+                                alert(resp);
+                        }
+
+                        catch (e) {
+                            alert(e.description);
+                        }
+                    },
+                    error: function (http, mes, exp) {
+                        alert(mes + " " + exp)
+                    }
+                });
+            }
+            catch (e) {
+                alert(e.description);
+            }
+        }
+        $(document).ready(display);
+    </script>
+</head>
+<body>
+    <div align="center">
+        第
+        <select id="page" onchange="display()">页</select>
+    </div><br />
+    <div id="msg"></div>
+</body>
+</html>

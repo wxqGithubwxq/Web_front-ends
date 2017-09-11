@@ -1,0 +1,73 @@
+﻿.body {
+   /*color:#ff0000;/*设置文字或元素的颜色*/
+   /*background-color;/*背景颜色*/
+   /*background-image;/*背景图像*/
+    /*font-family;/*设置字体*/
+    /*font-size;/*设置文字的大小*/
+    /*font-weight:bold;/*加粗字体*/
+    /*list-style;/*设置列表的样式*/
+   /*cursor;/*设置鼠标的样式*/
+   /*border;/*设置边框的样式*/
+  /*padding;/*设置元素的内补白*/
+  /* margin;/*设置元素的外边距*/
+/* stroke:azure;
+    
+  stroke-width:200px;
+    fill:red;
+text-indent:2em;设置首行缩进两字符
+    first-letter:设置下沉效果;
+vertical-align:bottom middle top;设置垂直对齐方式，仅限于内联元素
+    line-height:行高设置;*/
+    width:700px;
+    height:650px;
+    background:url(1.jpg);
+}
+.sizeh{
+    font-size:40px;
+}
+p{
+    font-size:20px;
+         background-color:white; 
+         color:black;
+         border-style:double; 
+         border-color:black; 
+           
+}
+#controlss{
+    width:250px;
+    height:200px;
+     font-size:30px;
+     background-color:white; 
+        
+         border-style:double; 
+         border-color:yellow;  
+         text-align:center;/*文字居中显示，仅限于块级元素*/
+         
+}
+img{
+    margin:20px 20px 50px 0;
+    float:left;
+}
+.large{
+    font-size:50px;
+    background-color:red;
+}
+.narrow{
+    width:1000px;
+}
+.select{
+    font-weight:bold;
+    color:red;
+}
+.hidden{
+    display:none;
+}
+.hover{
+    cursor:pointer;
+    background-color:blue;
+}
+span{
+    color:purple;
+    font-weight:bold;
+    font-style:italic;
+}

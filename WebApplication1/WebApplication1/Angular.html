@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html ng-app="App" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Angular</title>
+    <style>
+        .titleBar{background:blue;color:white;font:bold 12px/15px arial;display:block;}
+        .footer{color:white;background-color:blue;font:italic 8px/10px arial;display:block}
+        .scale{width:200px;height:200px}
+    </style>
+</head>
+<body>
+    <div ng-controller="Controller">
+        <span>Name:</span>
+        <input type="text" ng-model="first" />
+        <input type="text" ng-model="last" />
+        <button ng-click="Message()">Message</button>        
+        {{heading+message}}
+        <hr />
+    </div>
+    <div ng-controller="Time">
+        <h2>Config Time:</h2>
+        {{confi}}        
+        <h2>Run　Time</h2>
+        {{runt|date:"yyyy-MM-dd HH:mm:ss Z"}}
+        <hr />
+    </div>
+    <div ng-controller="change">
+        <span>Change Amount:</span>
+        <input type="number" ng-model="changeNumber" /><br />
+        <span>Starting Value:</span>
+        {{start}}
+        <br />
+        <span>Current Value:</span>
+        {{currentValue}}
+        <button ng-click="plus()">+</button>
+        <button ng-click="dec()">-</button><br />
+        <span>Different:</span>{{different}} <br />
+        <span>Change Amount:</span>{{changeNumber}}
+        <hr />
+    </div>
+    <div ng-controller="sorting">
+        <h1>Sorting and Filtering</h1>
+        <input type="text" ng-model="filterString" />
+        <button ng-click="sortString()">Filter</button><br /> <br />
+        <table>
+            <tr>
+                <th ng-click="sort('make')" style="cursor:pointer">Make</th>
+                <th ng-click="sort('model')" style="cursor:pointer">Model</th>
+                <th ng-click="sort('capacity')" style="cursor:pointer">Capacity</th>
+            </tr>
+            <tr ng-repeat="x in planesFilter|orderBy:column:reverse">
+                <th>{{x.make}}</th>
+                <th>{{x.model}}</th>
+                <th>{{x.capacity}}</th>
+            </tr>
+        </table>
+        <hr />
+    </div>
+    <div ng-controller="formController">
+        <h1>Forms Directives</h1>
+        <input type="text" ng-model="someText" />{{someText}}<br />
+        <input type="checkbox" ng-model="cb"/>CheckBox:{{cb}}<br />
+        <input type="radio" ng-model="cameraName" value="Canon" />Canon
+        <input type="radio" ng-model="cameraName" value="Nikon" />Nickon<br />SelectedCamera:{{cameraName}}<br />
+        <select ng-model="info" ng-options="c.stuNumber group by c.totalMarks for c in table"></select>{{info|json}}
+    </div><hr />
+    <div ng-controller="dataBinding">
+        <h1>Data Binding Directives</h1>
+        <label ng-repeat="color in colors">
+            <input type="radio" ng-model="myStyle.background" ng-value="color"/>{{color}}
+        </label>
+        <div style="width:200px;height:200px;border:1px" ng-style="myStyle">背景颜色</div><br />
+        Show Message:<input type="checkbox" ng-model="ch" />
+        <div ng-if="ch">
+            <p ng-bind="msg"></p>
+        </div>
+    </div><hr />
+    <div ng-controller="focusEvent">
+        <h1>Focus Event Directives</h1>
+        input 1:<br /><input type="text" ng-focus="get('input1')" ng-blur="lost($event,'input1')" />
+        <br />input 2:<br /><input type="text" ng-focus="get('input2')" ng-blur="lost($event,'input2')"  /><br />
+        Input Data:{{input}}
+    </div><hr />
+    <div ng-controller="keyboard">
+        <h1>Keyboard Event Directives</h1>
+        <input type="text" ng-keydown="keyboardState='pressed'" ng-keyup="up($event)" /><br />
+        Keyboard State:{{keyboardState}}<br />
+        Last Key:{{lastKey}}<br />
+        Stored String:{{storedString}}<br />
+        Recorded Key Strokes:{{keyStores}}
+    </div><hr />
+    <div ng-controller="mouse">
+        <h1>Mouse</h1>
+        <img ng-style="mouseStyle" ng-mouseenter="mouseState='Entered'" ng-mouseleave="mouseState='left'" ng-mousedown="mouseState='Down'" ng-mouseup="mouseState='Up'" ng-click="mouseClick($event)" ng-mousemove="mouseMove($event)"/>
+    <br />mouseState:{{mouseState}}<br />click:{{lastInfo}}<br />move:{{moveInfo}}</div><hr />
+    <div ng-controller="myboxController">
+        <h1>Custom</h1>
+        <mybox title="肖超" bwidth="200px">Hello,I am 肖超.</mybox>
+        <mybox title="宋刚" bwidth="200px">Hello,I am 宋刚.</mybox>
+    </div><hr />
+    <div ng-controller="scale">       
+        <img style="width:500px;height:500px" src="1.jpg" bigorsmall/>        
+    </div><hr />
+    <my-photos>
+        <my-photo title="简历"><img class="scale" src="2.jpg"/></my-photo>
+        <my-photo title="封面"><img class="scale" src="1.jpg" /></my-photo>
+    </my-photos> <hr />
+    <div ng-controller="watching">
+        <h1>Watching Values in the AngularJS Scope</h1>
+        <div>Select Color:<span ng-repeat="color in myColors" ng-click="setColor(color)" ng-style="{color:color}">{{color}}</span></div>
+        <span ng-click="hit()">[+]</span>Hits:{{hits}}<span ng-click="de()">[-]</span><br />
+        <span ng-click="miss()">[+]</span>misses:{{misses}}<br />
+        Object:{{group|json}}<br />
+        Number of Changes:{{changes}}
+    </div><hr />
+    <div ng-controller="parent">
+        <h1>人员基本信息统计调查</h1>    
+        <div ng-style="{display:'inline-block'}">
+            <button ng-repeat="name in names" ng-click="changeName()" ng-style="{display:'block',margin:'30px 10px'}" >{{name}}</button>
+        </div>
+        <div ng-controller="child" ng-style="{display:'inline-block',border:'2px solid black',width:'150px',height:'150px'}"  >
+            <table ng-style="{margin:'0px 20px 20px'}"    >
+                <tr ng-style="{margin:'10px'}"><td>姓名:{{currentName}}</td></tr>
+                <tr><td height="50">性别:{{infos.sex}}</td></tr>
+                <tr><td>年龄:{{infos.age}}</td></tr>
+            </table>
+            <button ng-click="deleteChar()" ng-style="{margin:'6px'}">Delete</button>
+        </div>
+    </div><hr />
+    <div ng-controller="createFilter">
+        {{text|censor:rtext}}<br />
+        {{"evil"|censor:"happy"}}
+        <p ng-click="filterText()" style="cursor:pointer">{{click}}</p>
+        <div ng-include="html"></div>
+    </div>
+    <hr />
+    <script type="text/javascript" language="JavaScript" src="JS/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" language="JavaScript" src="https://cdn.bootcss.com/angular.js/1.6.4/angular.min.js"></script>
+    <script type="text/javascript" language="JavaScript" src="JS/angular.js"></script>
+</body>
+</html>

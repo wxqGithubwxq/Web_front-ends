@@ -1,0 +1,28 @@
+﻿a{
+    margin:40px;
+    font-size:20px;
+}
+.Marks{
+    font-size:30px;
+    margin:20px;
+}
+h1{
+    color:red;
+}
+#year{
+    background:gray;
+    font-size:15px;
+}
+#topic{
+    font-size:20px;
+   background-color:black;
+    color:yellow;
+}
+.select{
+    color:red;
+}
+.highlight{
+    background-color:blue;
+}
+
+

@@ -1,0 +1,55 @@
+﻿#gallery{
+    position:relative;
+   //border:1px solid red;
+  // height:auto;
+}
+.photo{
+    position:relative;
+    float:left;
+    width:595px;
+    text-align:center;
+    height:550px;
+   //border:1px solid red;
+}
+.details{
+    //border:1px solid blue;
+   // overflow:hidden;
+}
+.description{
+    position:absolute;
+    /*border:1px solid blue;*/
+    top:50px;
+    right:250px;
+    font-size:40px;
+    font-weight:bold;
+    color:red;
+}
+.date{
+    position:absolute;
+   /*border:1px solid blue;*/
+    bottom:150px;
+    right:150px;
+    font-size:20px;
+    font-style:italic;
+}
+.photographer{
+    position:absolute;
+   /*border:1px solid blue;*/ 
+    bottom:120px;
+    right:150px;
+    font-size:20px;
+    font-style:italic;
+}
+/*#more-photos{
+    position:absolute;
+    bottom:-190px;
+    right:1190px;
+}*/
+#container{
+   
+   /* border:1px solid blue;*/
+}
+/*link{
+    height:20px;
+     border:1px solid blue;
+}*/
